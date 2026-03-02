@@ -1,14 +1,18 @@
 const express = require("express");
-const { connectDB } = require("./database/database");
-const { Connection } = require("mongoose");
+const { connectDB } = require("./config/database");
+const { auth } = require("./config/authMiddleware")
 
 const app = express();
 
 
-app.use("/user", async (req, res) => {
-    res.send("this is the user");
+app.use("/user", auth, async (req, res, next) => {
+    // res.send("this is the user");
+    next()
 })
 
+app.use("/user", (req, res, next) => {
+    res.send("hello this is user")
+})
 
 
 connectDB().then(() => {
