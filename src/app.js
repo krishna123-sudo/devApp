@@ -8,8 +8,14 @@ app.use(express.json());
 
 app.post("/signup", async (req, res) => {
     const data = req.body;
+    const emailData = req.body.email;
+
     const users = new User(data);
     try {
+        const existingUser = await User.findOne({ email: emailData });
+        if (existingUser) {
+            return res.status(400).send("email already exist");
+        }
         await users.save();
         res.send("user created sucessfully");
     } catch (err) {
@@ -17,7 +23,57 @@ app.post("/signup", async (req, res) => {
     }
 })
 
+app.get("/users", async (req, res) => {
+    try {
+        const userData = await User.find({});
+        res.send(userData)
+    } catch (error) {
+        res.status(400).send("cant able to fetch the user");
+    }
+})
 
+
+app.get("/user/:userId", async (req, res) => {
+    const id = req.params.userId;
+    try {
+        const userDataByID = await User.find({ _id: id });
+        console.log(userDataByID)
+        res.send(userDataByID)
+    } catch (error) {
+        res.status(400).send("cant get user on this user id");
+    }
+
+})
+
+app.delete("/user/:userId", async (req, res) => {
+    const id = req.params.userId;
+    try {
+        const deleteUser = await User.findByIdAndDelete({ _id: id })
+        res.send("User Deleted:" + deleteUser);
+    } catch (err) {
+        res.status(400).send("Cant able to delete user for this userID");
+    }
+})
+
+app.patch("/user/:userId", async (req, res) => {
+    const id = req.params.userId;
+    const data = req.body;
+    const allowedRoutes = [
+        "lastName", "age", "skills", "about"
+    ]
+    try {
+        const isUpdateAllowed = Object.keys(data).every(k => allowedRoutes.includes(k));
+        if (!isUpdateAllowed) {
+            res.send("not allowed");
+        } else {
+            const UpdatedUser = await User.findByIdAndUpdate({ _id: id }, data, { returnDocument: "after", runValidators: true })
+            res.send(UpdatedUser)
+        }
+
+    } catch (err) {
+        res.status(400).send("can able to update this UserId" + err.message)
+    }
+})
 
 connectDB().then(() => {
     console.log("database connected sucessfully")
