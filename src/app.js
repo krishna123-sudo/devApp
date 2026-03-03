@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
 const { loginValidate } = require("./utils/loginvalidation");
+const { userAuth } = require("./middlewares/auth");
 require("dotenv").config();
 
 
@@ -57,22 +58,24 @@ app.post("/login", async (req, res) => {
         loginValidate(req);
 
         const user = await User.findOne({ emailId: emailId })
-        console.log(user)
         if (!user) {
             throw new Error("invalid Credentials")
         }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log(isPasswordValid)
+        const isPasswordValid = await user.getPasswordValid(password);
 
         if (isPasswordValid) {
-            var token = jwt.sign({ _id: user._id }, `${process.env.JWT_SECRET}`)
-            res.cookie("token", token);
+            const token = await user.getJWT();
+            console.log(token)
+            res.cookie("token", token,
+                {
+                    expires: new Date(Date.now() + 900000)
+                });
             res.send("Login Suceesfull")
         }
 
 
     } catch (error) {
-        res.status(400).send("invalid credentials")
+        res.status(400).send("invalid credentials :" + error.message)
     }
 })
 
@@ -129,18 +132,9 @@ app.patch("/user/:userId", async (req, res) => {
     }
 })
 
-app.get("/profile", async (req, res) => {
+app.get("/profile", userAuth, async (req, res) => {
     try {
-        const cookies = req.cookies;
-        const { token } = cookies;
-        if (!token) {
-            throw new Error("tken not found")
-        }
-        const decodedMessage = await jwt.verify(token, `${process.env.JWT_SECRET}`)
-        const _id = decodedMessage;
-
-        const user = await User.findById(_id);
-        console.log(user)
+        const user = req.user;
         res.send(user);
     } catch (err) {
         res.status(400).send("can able to get profile")

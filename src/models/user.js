@@ -1,4 +1,8 @@
+// require("dotenv").config();
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt")
+
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -49,5 +53,25 @@ const userSchema = new mongoose.Schema({
         set: v => v === "" ? undefined : v
     }
 }, { timestamps: true, })
+
+
+userSchema.methods.getJWT = async function () {
+    const user = this;
+    console.log(process.env.JWT_SECRET)
+    const token = await jwt.sign({ _id: user._id }, `KisKisu@1234567890@@`, {
+        expiresIn: "7d"
+    })
+
+    return token
+}
+
+userSchema.methods.getPasswordValid = async function (passwordByUser) {
+    const user = this;
+
+    const isPasswordValid = await bcrypt.compare(passwordByUser, user.password);
+
+    return isPasswordValid;
+}
+
 
 module.exports = mongoose.model("User", userSchema);
