@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["male", "female", "others"]
     },
-    email: {
+    emailId: {
         type: String,
         required: true,
         maxLength: 50,
@@ -30,20 +30,24 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         trim: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     phoneNumber: {
         type: String,
-        required: true,
+        // required: true,
         minLength: 10,
         maxLength: 10
     },
     skills: {
-        type: String
+        type: [String]
     },
     about: {
         type: String,
         default: "this about is default you are a good person",
         set: v => v === "" ? undefined : v
     }
-})
+}, { timestamps: true, })
 
 module.exports = mongoose.model("User", userSchema);

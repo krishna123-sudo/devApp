@@ -2,17 +2,37 @@ const express = require("express");
 const { connectDB } = require("./config/database");
 const { auth } = require("./config/authMiddleware")
 const User = require("./models/user");
+const { validateUser } = require("./utils/validates")
+const bcrypt = require("bcrypt");
 
 const app = express();
 app.use(express.json());
 
 app.post("/signup", async (req, res) => {
-    const data = req.body;
-    const emailData = req.body.email;
-
-    const users = new User(data);
     try {
-        const existingUser = await User.findOne({ email: emailData });
+        //validation
+        validateUser(req)
+
+        //password bcrypt
+        const { firstName, lastName, emailId, password, skills } = req.body;
+
+        const hashedPassword = await bcrypt.hash(password, 10)
+        console.log(hashedPassword)
+
+        const skillArray = Array.isArray(req.body.skills) ? req.body.skills : [];
+        //data flow
+        const emailData = req.body.emailId;
+        const users = new User(
+            {
+                firstName,
+                lastName,
+                emailId,
+                password: hashedPassword,
+                skills: skillArray
+            }
+        );
+
+        const existingUser = await User.findOne({ emailId: emailData });
         if (existingUser) {
             return res.status(400).send("email already exist");
         }
