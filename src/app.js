@@ -4,6 +4,8 @@ const { auth } = require("./config/authMiddleware")
 const User = require("./models/user");
 const { validateUser } = require("./utils/validates")
 const bcrypt = require("bcrypt");
+const { loginValidate } = require("./utils/loginvalidation");
+
 
 const app = express();
 app.use(express.json());
@@ -42,6 +44,28 @@ app.post("/signup", async (req, res) => {
         res.status(400).send("error occurs while saving :" + err.message)
     }
 })
+
+//Login
+app.post("/login", async (req, res) => {
+    try {
+        const { emailId, password } = req.body;
+        loginValidate(req);
+        const user = await User.findOne({ emailId: emailId })
+        if (!user) {
+            throw new Error("invalid Credentials")
+        }
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if (isPasswordValid) {
+            res.send("Login Suceesfull")
+        }
+
+
+    } catch (error) {
+        res.status(400).send("invalid credentials")
+    }
+})
+
 
 app.get("/users", async (req, res) => {
     try {
