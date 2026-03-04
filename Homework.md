@@ -76,3 +76,5 @@
 -set the expiry of jwt token and check and set to 7d
 -create user schema method to get jwt
 -create UserSchema method to comparepassword(passwordinputbyuser);
+
+-explore tinder api and list api u understand
