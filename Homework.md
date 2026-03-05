@@ -84,3 +84,8 @@
 -create routes folder for managing auth,profile,request routers
 -create authRouter,profile Router ,requestRouter 
 -Import therse routers in app.js
+
+-create post /logout APi
+-create Patch /profile/edit
+-create patch /profilr/password api=>froget password api
+-make you validate all data in every post patch apis

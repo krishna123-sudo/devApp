@@ -13,6 +13,17 @@ const validateUser = (req, res) => {
     }
 }
 
+const validateEditProfileUser = (req) => {
+    const allowedFileds = [
+        "firstName"
+    ];
+
+    const isValidField = Object.keys(req.body).every((field) => allowedFileds.includes(field));
+
+    return isValidField;
+}
+
 module.exports = {
-    validateUser
+    validateUser,
+    validateEditProfileUser
 }

@@ -7,7 +7,7 @@
 ## profileRouter
 - get /profile/view
 - patch /profile/edit
-- patch /profile/password
+- patch /profile/password    //homework
 
 ## connectionRequestRouter
 - post /request/send/intrested/:userId
