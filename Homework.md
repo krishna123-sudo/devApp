@@ -78,3 +78,9 @@
 -create UserSchema method to comparepassword(passwordinputbyuser);
 
 -explore tinder api and list api u understand
+-create a list of all the api u find in the tinder
+-group multiple router under respective routers
+-read documentations for express.routers
+-create routes folder for managing auth,profile,request routers
+-create authRouter,profile Router ,requestRouter 
+-Import therse routers in app.js
