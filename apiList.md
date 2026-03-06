@@ -10,8 +10,9 @@
 - patch /profile/password    //homework
 
 ## connectionRequestRouter
-- post /request/send/intrested/:userId
-- post /request/send/ignore/:userId
+- post /request/send/:status/:userId
+<!-- - post /request/send/ignore/:userId -->
+
 - post /request/review/accepted/:rewuestId
 - post /request/review/rejected/:rewuestId
 
