@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const connectionRequestSchema = new mongoose.Schema({
     fromUserId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
     },
     toUserId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
     },
     status: {
         type: String,
@@ -19,7 +19,11 @@ const connectionRequestSchema = new mongoose.Schema({
     }
 }, { timestamps: true })
 
-// connectionRequestSchema.pre("save", async function (next) {
+
+//compound index to make query fast
+connectionRequestSchema.index({ fromUserId: 1, toUserId: 1 });
+
+// connectionRequestSchema.pre("save", function (next) {
 //     if (this.fromUserId.equals(this.toUserId)) {
 //         // return next(new Error("Cannot send connection request to yourself"));
 //         throw new Error("Cannot send connection request to yourself");

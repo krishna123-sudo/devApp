@@ -89,3 +89,13 @@
 -create Patch /profile/edit
 -create patch /profilr/password api=>froget password api
 -make you validate all data in every post patch apis
+
+-create connection request Schema
+-send Connection reqest api
+-proper validation of data
+-think about all corner case
+-$or query and $and query
+
+-read about compound index
+-why do we need index in db
+-why not alway make index its tugh for db to handle ? why?
