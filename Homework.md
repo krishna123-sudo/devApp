@@ -105,3 +105,6 @@
 -read about ref and populate
 -Create Get /user/request/recieved with all the checks
 -create Get api for user connections
+
+-logic for get /feed api
+explore the $nin,$ne,$and,$or and other query operators
