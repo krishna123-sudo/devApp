@@ -1,7 +1,7 @@
 
 ## authrouter
 - post /signup
-- post /logout
+- post /login
 - post /logout
 
 ## profileRouter
