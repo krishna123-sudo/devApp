@@ -16,7 +16,6 @@ authRouter.post("/signup", async (req, res) => {
         const { firstName, lastName, emailId, password, skills } = req.body;
 
         const hashedPassword = await bcrypt.hash(password, 10)
-        console.log(hashedPassword)
 
         const skillArray = Array.isArray(req.body.skills) ? req.body.skills : [];
         //data flow

@@ -99,3 +99,6 @@
 -read about compound index
 -why do we need index in db
 -why not alway make index its tugh for db to handle ? why?
+
+-wrte code for proper validation for post
+-thought process-Post vd get
