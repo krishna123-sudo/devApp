@@ -102,3 +102,6 @@
 
 -wrte code for proper validation for post
 -thought process-Post vd get
+-read about ref and populate
+-Create Get /user/request/recieved with all the checks
+-create Get api for user connections

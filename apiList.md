@@ -17,8 +17,8 @@
 - post /request/review/rejected/:rewuestId
 
 ## userRouter
-- get /user/connection
 - get /user/request/recieved
+- get /user/connection
 - get /user/feed --gets you the profile of other user on platform
 
 
