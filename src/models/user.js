@@ -54,13 +54,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "this about is default you are a good person",
         set: v => v === "" ? undefined : v
+    },
+    photoUrl: {
+        type: String
     }
 }, { timestamps: true, })
 
 
 userSchema.methods.getJWT = async function () {
     const user = this;
-    console.log(process.env.JWT_SECRET)
+    // console.log(process.env.JWT_SECRET)
     const token = await jwt.sign({ _id: user._id }, `KisKisu@1234567890@@`, {
         expiresIn: "7d"
     })
