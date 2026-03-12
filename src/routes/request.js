@@ -18,7 +18,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
             return res.status(404).json({ message: "no user Found" })
         }
 
-        const alloweStatus = ["ignored", "intrested"]
+        const alloweStatus = ["ignore", "intrested"]
 
         if (!alloweStatus.includes(status)) {
             return res.status(400).json({ message: "invalid status type :" + status })

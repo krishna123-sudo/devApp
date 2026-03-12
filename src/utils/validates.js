@@ -15,7 +15,8 @@ const validateUser = (req, res) => {
 
 const validateEditProfileUser = (req) => {
     const allowedFileds = [
-        "firstName"
+        "firstName",
+        "lastName", "about", "photoUrl"
     ];
 
     const isValidField = Object.keys(req.body).every((field) => allowedFileds.includes(field));

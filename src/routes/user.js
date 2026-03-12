@@ -13,10 +13,11 @@ userRouter.get("/user/requests/recieved", userAuth, async (req, res) => {
         const loggedInUser = req.user;
         const connectionRequest = await connectionRequestModel.find({
             $or: [
-                { fromUserId: loggedInUser._id, status: "intrested" },
+                // { fromUserId: loggedInUser._id, status: "intrested" },
                 { toUserId: loggedInUser._id, status: "intrested" },
             ],
-        }).populate("fromUserId", "firstName lastName age skills about");
+        }).populate("fromUserId", "firstName lastName age skills about photoUrl")
+            .populate("toUserId", "firstName lastName age skills about photoUrl")
 
         res.json({ message: "data fetched suceesfullt", data: connectionRequest })
     } catch (err) {
@@ -31,8 +32,8 @@ userRouter.get("/user/connection", userAuth, async (req, res) => {
         const connectionMatched = await connectionRequestModel.find({
             toUserId: loggedInUser._id,
             status: "accepted"
-        }).populate("fromUserId", "firstName lastName age skills about")
-            .populate("toUserId", "firstName lastName age skills about");
+        }).populate("fromUserId", "firstName lastName age skills about photoUrl")
+            .populate("toUserId", "firstName lastName age skills about photoUrl");
 
         const data = connectionMatched.map(row => {
             if (row.fromUserId._id.toString() === loggedInUser._id.toString()) {
