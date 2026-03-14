@@ -27,6 +27,7 @@ authRouter.post("/signup", async (req, res) => {
                 emailId,
                 password: hashedPassword,
                 skills: skillArray,
+                about,
                 photoUrl
             }
         );

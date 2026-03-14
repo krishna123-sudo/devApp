@@ -13,7 +13,7 @@ userRouter.get("/user/requests/recieved", userAuth, async (req, res) => {
         const loggedInUser = req.user;
         const connectionRequest = await connectionRequestModel.find({
             $or: [
-                // { fromUserId: loggedInUser._id, status: "intrested" },
+                { fromUserId: loggedInUser._id, status: "intrested" },
                 { toUserId: loggedInUser._id, status: "intrested" },
             ],
         }).populate("fromUserId", "firstName lastName age skills about photoUrl")
