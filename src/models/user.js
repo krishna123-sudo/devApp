@@ -67,7 +67,12 @@ userSchema.methods.getJWT = async function () {
     const token = await jwt.sign({ _id: user._id }, `KisKisu@1234567890@@`, {
         expiresIn: "7d"
     })
-
+    // S O L I D
+    // Single Responsibility
+    // Open for extention close for modification
+    // Libskov substitution
+    // Interface Segregation Principle (ISP) states that clients should not be forced to depend on methods they do not use
+    // Dependecy Injection and Inversion
     return token
 }
 
