@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt")
@@ -64,7 +64,7 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.getJWT = async function () {
     const user = this;
     // console.log(process.env.JWT_SECRET)
-    const token = await jwt.sign({ _id: user._id }, `KisKisu@1234567890@@`, {
+    const token = await jwt.sign({ _id: user._id }, `${process.env.JWT_SECRET}`, {
         expiresIn: "7d"
     })
     // S O L I D
