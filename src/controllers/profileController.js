@@ -5,7 +5,7 @@ const { validateEditProfileUser } = require("../utils/validates");
 const profileViewController = async (req, res) => {
     try {
         const result = await profileView(req);
-        res.status(result.statusCode).json({ message: "user fetched sucessfully", result })
+        res.status(result.statusCode).json({ result })
     } catch (err) {
         res.status(HTTP_STATUS.BAD_REQUEST).json({ message: err.message });
     }
@@ -34,7 +34,7 @@ const profilePasswordController = async (req, res) => {
 
     const result = await profilePasswordEdit(req);
 
-    res.status(result.statusCode).json({ message: "password updated successfully", result })
+    res.status(result.statusCode).json({ result })
 }
 
 module.exports = { profileViewController, profileEditController, profilePasswordController };
