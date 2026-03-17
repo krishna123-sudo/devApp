@@ -30,7 +30,7 @@ const signupUserService = async (req) => {
         }
     );
 
-    const existingUser = await Use.findOne({ emailId: emailData });
+    const existingUser = await User.findOne({ emailId: emailData });
     if (existingUser) {
         return {
             statusCode: HTTP_STATUS.DUPLICATE,

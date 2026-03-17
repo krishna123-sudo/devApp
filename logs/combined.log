@@ -1,0 +1,11 @@
+2026-03-17T09:36:43.173Z [ERROR]: Signup failed: Use is not defined
+2026-03-17T09:37:18.155Z [INFO]: User signup successful: 69b920cc15949eaa5c32a405
+2026-03-17T09:38:06.038Z [INFO]: User login successful
+2026-03-17T09:39:03.399Z [INFO]: User login successful
+2026-03-17T09:39:25.244Z [INFO]: User logout successful
+2026-03-17T09:39:28.545Z [INFO]: User logout successful
+2026-03-17T09:39:34.611Z [INFO]: User login successful
+2026-03-17T09:39:39.996Z [INFO]: Profile fetched successfully for user: 69b920cc15949eaa5c32a405
+2026-03-17T09:40:02.289Z [INFO]: Profile updated successfully for user: 69b920cc15949eaa5c32a405
+2026-03-17T09:41:08.047Z [INFO]: Password changed successfully for user: 69b920cc15949eaa5c32a405
+2026-03-17T09:42:27.212Z [INFO]: User signup successful: 69b92203ede050c16878f6c5

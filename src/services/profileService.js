@@ -1,4 +1,5 @@
 const { HTTP_STATUS } = require("../utils/httpStatus");
+const bcrypt = require("bcrypt");
 
 const profileView = (req) => {
     const user = req.user;

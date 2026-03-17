@@ -1,6 +1,8 @@
 const { connectionRequestModel } = require("../models/connectionRequest");
 const User = require("../models/user");
 const { HTTP_STATUS } = require("../utils/httpStatus");
+const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills"
+
 
 const requestRecieved = async (userId) => {
 
@@ -36,16 +38,13 @@ const userConnection = async (connectionMatched) => {
     }
 
 }
-const feedApi = async (loggedInUser, hideUsersFromFeed) => {
+const feedApi = async (loggedInUser, hideUsersFromFeed, limit, skip) => {
     //user should see al the user card except
     //0.his own card
     //1.his connection
     //2.ignored people
     //already send the connection request
-    const page = parseInt(req.query.page) || 1;
-    let limit = parseInt(req.query.limit) || 10;
-    limit = limit > 50 ? 50 : limit
-    const skip = (page - 1) * limit;
+
 
     const user = await User.find({
         $and: [

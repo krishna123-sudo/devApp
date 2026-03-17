@@ -1,3 +1,4 @@
+const { connectionRequestModel } = require("../models/connectionRequest");
 const { requestRecieved, userConnection, feedApi } = require("../services/userService");
 const { HTTP_STATUS } = require("../utils/httpStatus");
 
@@ -36,6 +37,10 @@ const feedControlerApi = async (req, res) => {
     const loggedInUser = req.user
     try {
         //find all the connection req send+recieve
+        const page = parseInt(req.query.page) || 1;
+        let limit = parseInt(req.query.limit) || 10;
+        limit = limit > 50 ? 50 : limit
+        const skip = (page - 1) * limit;
         const connectionRequest = await connectionRequestModel.find({
             $or: [
                 { fromUserId: loggedInUser._id },
@@ -49,7 +54,7 @@ const feedControlerApi = async (req, res) => {
             hideUsersFromFeed.add(req.toUserId.toString());
         })
 
-        const result = await feedApi(loggedInUser, hideUsersFromFeed)
+        const result = await feedApi(loggedInUser, hideUsersFromFeed, limit, skip)
         res.status(result.statusCode).json({ result });
 
     } catch (err) {
