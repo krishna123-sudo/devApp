@@ -44,6 +44,7 @@ const profilePasswordController = async (req, res) => {
 
         res.status(result.statusCode).json({ result })
     } catch (err) {
+        logger, info(`${err.message}`);
         res.status(HTTP_STATUS.BAD_REQUEST).json({ message: err.message });
     }
 }
