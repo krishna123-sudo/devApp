@@ -1,7 +1,7 @@
 const { connectionRequestModel } = require("../models/connectionRequest");
 const User = require("../models/user");
 const { HTTP_STATUS } = require("../utils/httpStatus");
-
+const { run } = require("../utils/sendEmail");
 
 
 const requestSend = async (req, res) => {
@@ -57,6 +57,9 @@ const requestSend = async (req, res) => {
     });
     const data = await connectionRequest.save();
 
+    run()
+        .then(() => console.log("email sent successfully"))
+        .catch(() => console.log("Email failed:", error.message));
     return {
         statusCode: HTTP_STATUS.OK,
         message: "Request send successfully",

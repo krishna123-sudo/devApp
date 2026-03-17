@@ -15,6 +15,7 @@
   "author": "Krishna Sekhar",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.1010.0",
     "bcrypt": "^6.0.0",
     "brcypt": "^1.0.1",
     "cookie-parser": "^1.4.7",
