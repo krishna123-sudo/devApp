@@ -6,6 +6,9 @@ const cors = require("cors");
 
 
 const app = express();
+
+require("./utils/cronJobs")
+
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true
