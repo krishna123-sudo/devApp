@@ -18,7 +18,7 @@ const loginController = async (req, res) => {
     try {
         const result = await loginService(req, res);
         logger.info(`User login successful`);
-        res.status(result.statusCode).json({ message: "login successfull ", result })
+        res.status(result.statusCode).json({ message: result.message, result })
     } catch (err) {
         logger.error(`Login failed: ${err.message}`);
         res.status(HTTP_STATUS.BAD_REQUEST).json({ messgae: err.message });

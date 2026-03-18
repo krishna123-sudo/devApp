@@ -21,7 +21,7 @@ const requestRecieved = async (userId) => {
 
 }
 
-const userConnection = async (connectionMatched) => {
+const userConnection = async (connectionMatched, loggedInUser) => {
 
     const data = connectionMatched.map(row => {
         if (row.fromUserId._id.toString() === loggedInUser._id.toString()) {

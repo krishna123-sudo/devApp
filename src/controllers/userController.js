@@ -25,7 +25,7 @@ const userConnectionController = async (req, res) => {
         }).populate("fromUserId", "firstName lastName age skills about photoUrl")
             .populate("toUserId", "firstName lastName age skills about photoUrl");
 
-        const result = await userConnection(connectionMatched);
+        const result = await userConnection(connectionMatched, loggedInUser);
 
         res.status(result.statusCode).json({ result });
 
