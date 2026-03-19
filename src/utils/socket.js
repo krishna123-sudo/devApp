@@ -8,7 +8,7 @@ const initializeSocket = (server) => {
     });
 
     io.on("connection", (socket) => {
-        // console.log("User connected:", socket.id);
+        console.log("User connected:", socket.id);
 
         socket.on("joinChat", ({ firstName, targetUserId, loggedInuserId }) => {
 
@@ -20,7 +20,7 @@ const initializeSocket = (server) => {
 
             const roomId = [loggedInuserId, targetUserId].sort().join("_");
 
-            // console.log("✅ JOIN:", firstName, roomId);
+            console.log("✅ JOIN:", firstName, roomId);
 
             socket.join(roomId);
         });
@@ -34,7 +34,7 @@ const initializeSocket = (server) => {
 
             const roomId = [loggedInuserId, targetUserId].sort().join("_");
 
-            // console.log("📩 MESSAGE:", text, "ROOM:", roomId);
+            console.log("📩 MESSAGE:", text, "ROOM:", roomId);
 
             io.to(roomId).emit("messageRecieved", {
                 firstName,
