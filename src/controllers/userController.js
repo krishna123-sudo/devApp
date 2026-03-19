@@ -20,7 +20,11 @@ const userConnectionController = async (req, res) => {
         const loggedInUser = req.user;
 
         const connectionMatched = await connectionRequestModel.find({
-            toUserId: loggedInUser._id,
+            // toUserId: loggedInUser._id,
+            $or: [
+                { toUserId: loggedInUser._id },
+                { fromUserId: loggedInUser._id },
+            ],
             status: "accepted"
         }).populate("fromUserId", "firstName lastName age skills about photoUrl")
             .populate("toUserId", "firstName lastName age skills about photoUrl");
